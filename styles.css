@@ -761,11 +761,193 @@ header {
   margin: 20px;
   background-color: #003366;
 }
+
 .team-block {
-  text-align: center;
-  background-color: rgb(238, 239, 244);
-  padding: 40px;
+  padding: 4rem 2rem;
+  background: #f5f5f5;
+  overflow: hidden;
 }
+
+.team-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.team-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color:black;
+  margin-bottom: 0.5rem;
+}
+
+.team-subtitle {
+  font-size: 1.25rem;
+  color: black;
+}
+
+/* Faculty Section */
+.faculty-section {
+  max-width: 400px;
+  margin: 0 auto 4rem;
+}
+
+.faculty-label {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.faculty-card {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+
+.team-grid {
+  display: flex;
+  gap: 2rem;
+  animation: scroll-left 30s linear infinite;
+  width: fit-content;
+  padding: 1rem 0;
+}
+
+.team-grid:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-320px * 9 - 2rem * 9));
+  }
+}
+
+
+.team-card {
+  min-width: 320px;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-inner {
+  position: relative;
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover .card-image {
+  transform: scale(1.1);
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.team-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.card-role {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #667eea;
+  margin-bottom: 0.5rem;
+}
+
+.card-dept {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.card-contact {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.875rem;
+  word-break: break-all;
+}
+
+.contact-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  color: #667eea;
+}
+
+
+@media (max-width: 768px) {
+  .team-title {
+    font-size: 2rem;
+  }
+
+  .team-subtitle {
+    font-size: 1rem;
+  }
+
+  .team-card {
+    min-width: 280px;
+  }
+
+  .card-image-wrapper {
+    height: 280px;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-280px * 9 - 2rem * 9));
+    }
+  }
+}
+
 
 .team-container {
   display: flex;

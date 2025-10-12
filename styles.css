@@ -764,41 +764,61 @@ header {
 
 .team-block {
   padding: 4rem 2rem;
-  background: #f5f5f5;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   overflow: hidden;
+  position: relative;
+}
+
+.team-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+  opacity: 0.3;
 }
 
 .team-header {
   text-align: center;
   margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
 }
 
 .team-title {
   font-size: 3rem;
   font-weight: 700;
-  color:black;
+  color: white;
   margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.8s ease-out;
 }
 
 .team-subtitle {
   font-size: 1.25rem;
-  color: black;
+  color: rgba(255, 255, 255, 0.9);
+  animation: fadeInUp 1s ease-out;
 }
 
 /* Faculty Section */
 .faculty-section {
   max-width: 400px;
   margin: 0 auto 4rem;
+  position: relative;
+  z-index: 1;
 }
 
 .faculty-label {
   text-align: center;
   font-size: 1.5rem;
   font-weight: 600;
-  color: black;
+  color: white;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 2px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .faculty-card {
@@ -806,25 +826,68 @@ header {
   margin: 0 auto;
 }
 
+.team-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
+  z-index: 1;
+}
+
+.team-carousel-wrapper::before,
+.team-carousel-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.team-carousel-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(102, 126, 234, 1), rgba(102, 126, 234, 0));
+}
+
+.team-carousel-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(118, 75, 162, 1), rgba(118, 75, 162, 0));
+}
+
+.team-grid-container {
+  display: flex;
+  width: fit-content;
+}
 
 .team-grid {
   display: flex;
   gap: 2rem;
-  animation: scroll-left 30s linear infinite;
-  width: fit-content;
-  padding: 1rem 0;
+  animation: infiniteScroll 40s linear infinite;
+  will-change: transform;
 }
 
-.team-grid:hover {
+.team-carousel-wrapper:hover .team-grid {
   animation-play-state: paused;
 }
 
-@keyframes scroll-left {
+@keyframes infiniteScroll {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-320px * 9 - 2rem * 9));
+    transform: translateX(calc(-352px * 9));
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -832,15 +895,38 @@ header {
 .team-card {
   min-width: 320px;
   background: white;
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+}
+
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1.25rem;
+  padding: 2px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .team-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+}
+
+.team-card:hover::before {
+  opacity: 1;
 }
 
 .card-inner {
@@ -871,9 +957,9 @@ header {
   left: 0;
   right: 0;
   height: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(102, 126, 234, 0.8) 0%, transparent 60%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 
 .team-card:hover .card-overlay {
@@ -894,7 +980,10 @@ header {
 .card-role {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #667eea;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 0.5rem;
 }
 
@@ -938,13 +1027,18 @@ header {
     height: 280px;
   }
 
-  @keyframes scroll-left {
+  @keyframes infiniteScroll {
     0% {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(calc(-280px * 9 - 2rem * 9));
+      transform: translateX(calc(-312px * 9));
     }
+  }
+
+  .team-carousel-wrapper::before,
+  .team-carousel-wrapper::after {
+    width: 80px;
   }
 }
 
